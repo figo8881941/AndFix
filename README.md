@@ -10,7 +10,7 @@ AndFix is a solution to fix the bugs online instead of redistributing Android Ap
 
 Andfix is an acronym for "**And**roid hot-**fix**".
 
-AndFix supports Android version from 2.3 to 6.0, both ARM and X86 architecture, both Dalvik and ART runtime.
+AndFix supports Android version from 2.3 to 7.0, both ARM and X86 architecture, both Dalvik and ART runtime, both 32bit and 64bit.
 
 The compressed file format of AndFix's patch is **.apatch**. It is dispatched from your own server to client to fix your App's bugs.
 
@@ -38,45 +38,45 @@ Directly add AndFix aar to your project as compile libraries.
 
 For your maven dependency,
 
-	```
-	<dependency>
-  		<groupId>com.alipay.euler</groupId>
-  		<artifactId>andfix</artifactId>
-  		<version>0.4.0</version>
-  		<type>aar</type>
-	</dependency>
-	```
+```xml
+<dependency>
+  	<groupId>com.alipay.euler</groupId>
+  	<artifactId>andfix</artifactId>
+  	<version>0.5.0</version>
+  	<type>aar</type>
+</dependency>
+```
 For your gradle dependency,
 
-	```
-	dependencies {
-   		compile 'com.alipay.euler:andfix:0.4.0@aar'
-	}
-	```
+```groovy
+dependencies {
+	compile 'com.alipay.euler:andfix:0.5.0@aar'
+}
+```
 
 ### How to use?
 
 1. Initialize PatchManager,
 
-	```
-	patchManager = new PatchManager(context);
-	patchManager.init(appversion);//current version
-	```
+```java
+patchManager = new PatchManager(context);
+patchManager.init(appversion);//current version
+```
 
 2. Load patch,
 
-	```
-	patchManager.loadPatch();
-	```
+```java
+patchManager.loadPatch();
+```
 
-	You should load patch as early as possible, generally, in the initialization phase of your application(such as `Application.onCreate()`).
+You should load patch as early as possible, generally, in the initialization phase of your application(such as `Application.onCreate()`).
 
 3. Add patch,
 
-	```
-	patchManager.addPatch(path);//path of the patch file that was downloaded
-	```
-	When a new patch file has been downloaded, it will become effective immediately by `addPatch`.
+```java
+patchManager.addPatch(path);//path of the patch file that was downloaded
+```
+When a new patch file has been downloaded, it will become effective immediately by `addPatch`.
 
 ## Developer Tool
 
@@ -149,12 +149,12 @@ And it is necessary to keep classes as follow,
 To ensure that these classes can be found after running an obfuscation and static analysis tool like ProGuard, add the configuration below to your ProGuard configuration file.
 
 
-	```
-	-keep class * extends java.lang.annotation.Annotation
-	-keepclasseswithmembernames class * {
-    	native <methods>;
-	}
-	```
+```
+-keep class * extends java.lang.annotation.Annotation
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+```
 
 ### Self-Modifying Code
 
